@@ -19,7 +19,6 @@
 
 #include "pageappsettings.h"
 #include "ui_pageappsettings.h"
-#include "setupwizardapp.h"
 #include "utility.h"
 
 PageAppSettings::PageAppSettings(QWidget *parent) :
@@ -27,8 +26,6 @@ PageAppSettings::PageAppSettings(QWidget *parent) :
     ui(new Ui::PageAppSettings)
 {
     ui->setupUi(this);
-    QString theme = Utility::getThemePath();
-    ui->appWizardButton->setIcon(QPixmap(theme + "icons/Wizard-96.png"));
     layout()->setContentsMargins(0, 0, 0, 0);
     mVesc = nullptr;
 }
@@ -79,13 +76,5 @@ void PageAppSettings::reloadParams()
         } else {
             ui->textEdit->setText("App Setting Description not found.");
         }
-    }
-}
-
-void PageAppSettings::on_appWizardButton_clicked()
-{
-    if (mVesc) {
-        SetupWizardApp w(mVesc, this);
-        w.exec();
     }
 }

@@ -29,7 +29,6 @@
 #include <QDesktopServices>
 #include <QProgressDialog>
 #include "parametereditor.h"
-#include "startupwizard.h"
 #include "widgets/helpdialog.h"
 #include "utility.h"
 #include "widgets/paramdialog.h"
@@ -141,10 +140,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionTerminalPrintThreads->setIcon(QPixmap(theme + "icons/Electronics-96.png"));
     ui->actionTerminalDRVResetLatchedFaults->setIcon(QPixmap(theme + "icons/Bug-96.png"));
     ui->actionLibrariesUsed->setIcon(QPixmap(theme + "icons/About-96.png"));
-    ui->actionMotorSetupWizard->setIcon(QPixmap(theme + "icons/Wizard-96.png"));
-    ui->actionAppSetupWizard->setIcon(QPixmap(theme + "icons/Wizard-96.png"));
-    ui->actionAutoSetupFOC->setIcon(QPixmap(theme + "icons/Wizard-96.png"));
-    ui->actionSetupMotorsFOCQuick->setIcon(QPixmap(theme + "icons/Wizard-96.png"));
     ui->actionAboutQt->setIcon(QPixmap(theme + "icons/About-96.png"));
     ui->actionParameterEditorInfo->setIcon(QPixmap(theme + "icons/Horizontal Settings Mixer-96.png"));
     ui->actionSafetyInformation->setIcon(QPixmap(theme + "icons/About-96.png"));
@@ -172,11 +167,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionReadAppconfDefault->setIcon(QIcon(theme + "icons/app_default.png"));
     ui->actionWriteAppconf->setIcon(QIcon(theme + "icons/app_down.png"));
 
-    QIcon mycon = QIcon(theme + "icons/keys_off.png");
-    mycon.addPixmap(QPixmap(theme + "icons/keys_on.png"), QIcon::Normal, QIcon::On);
-    ui->actionKeyboardControl->setIcon(mycon);
-    ui->actionGamepadControl->setIcon(QIcon(theme + "icons/Controller-96.png"));
-    mycon = QIcon(theme + "icons/rt_off.png");
+    QIcon mycon = QIcon(theme + "icons/rt_off.png");
     mycon.addPixmap(QPixmap(theme + "icons/rt_on.png"), QIcon::Normal, QIcon::On);
     ui->actionRtData->setIcon(mycon);
     mycon = QIcon(theme + "icons/rt_app_off.png");
@@ -568,89 +559,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *e)
         }
     }
 
-    if (!ui->actionKeyboardControl->isChecked()) {
-        return false;
-    }
-
-    if (qApp->focusWidget() && QString(qApp->focusWidget()->metaObject()->className()).contains("edit",Qt::CaseInsensitive)) {
-        ui->actionKeyboardControl->setEnabled(false);
-        return false;
-    }
-    ui->actionKeyboardControl->setEnabled(true);
-
-    if (e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease) {
-        bool isPress = e->type() == QEvent::KeyPress;
-
-        switch(keyEvent->key()) {
-        case Qt::Key_Up:
-        case Qt::Key_Down:
-        case Qt::Key_Left:
-        case Qt::Key_Right:
-        case Qt::Key_PageDown:
-            break;
-
-        default:
-            return false;
-        }
-
-        if(keyEvent->isAutoRepeat()) {
-            return true;
-        }
-
-        switch(keyEvent->key()) {
-        case Qt::Key_Up:
-            if (isPress) {
-                mVesc->commands()->setCurrent(ui->currentBox->value());
-                ui->actionSendAlive->setChecked(true);
-            } else {
-                mVesc->commands()->setCurrent(0.0);
-                ui->actionSendAlive->setChecked(false);
-            }
-            break;
-
-        case Qt::Key_Down:
-            if (isPress) {
-                mVesc->commands()->setCurrent(-ui->currentBox->value());
-                ui->actionSendAlive->setChecked(true);
-            } else {
-                mVesc->commands()->setCurrent(0.0);
-                ui->actionSendAlive->setChecked(false);
-            }
-            break;
-
-        case Qt::Key_Left:
-            if (isPress) {
-                mKeyLeft = true;
-            } else {
-                mKeyLeft = false;
-            }
-            break;
-
-        case Qt::Key_Right:
-            if (isPress) {
-                mKeyRight = true;
-            } else {
-                mKeyRight = false;
-            }
-            break;
-
-        case Qt::Key_PageDown:
-            if (isPress) {
-                mVesc->commands()->setCurrentBrake(-ui->currentBox->value());
-                ui->actionSendAlive->setChecked(true);
-            } else {
-                mVesc->commands()->setCurrent(0.0);
-                ui->actionSendAlive->setChecked(false);
-            }
-            break;
-
-        default:
-            break;
-        }
-
-        return true;
-    }
-
     return false;
 }
 
@@ -778,7 +686,6 @@ void MainWindow::timerSlot()
         ui->actionRtData->setChecked(false);
         ui->actionRtDataApp->setChecked(false);
         ui->actionIMU->setChecked(false);
-        ui->actionKeyboardControl->setChecked(false);
         ui->actionrtDataBms->setChecked(false);
     }
 
@@ -837,11 +744,6 @@ void MainWindow::timerSlot()
 
         if (!mSettings.contains("intro_done")) {
             mSettings.setValue("intro_done", false);
-        }
-
-        if (!mSettings.value("intro_done").toBool()) {
-            StartupWizard w(mVesc, this);
-            w.exec();
         }
 
         if (!mSettings.value("intro_done").toBool()) {
@@ -1276,16 +1178,6 @@ void MainWindow::reloadPages()
     ui->pageWidget->addWidget(mPageWelcome);
     QString theme = Utility::getThemePath();
     addPageItem(tr("Welcome & Wizards"),  theme + "icons/Home-96.png", "", true);
-    connect(ui->actionAutoSetupFOC, SIGNAL(triggered(bool)),
-            mPageWelcome, SLOT(startSetupWizardFocQml()));
-    connect(ui->actionMotorSetupWizard, SIGNAL(triggered(bool)),
-            mPageWelcome, SLOT(startSetupWizardMotor()));
-    connect(ui->actionAppSetupWizard, SIGNAL(triggered(bool)),
-            mPageWelcome, SLOT(startSetupWizardApp()));
-    connect(ui->actionSetupMotorsFOCQuick, SIGNAL(triggered(bool)),
-            mPageWelcome, SLOT(startSetupWizardFocSimple()));
-
-
 
     mPageConnection = new PageConnection(this);
     mPageConnection->setVesc(mVesc);
@@ -1302,8 +1194,6 @@ void MainWindow::reloadPages()
     ui->pageWidget->addWidget(mPageMotorSettings);
     addPageItem(tr("Motor Settings"),  theme + "icons/motor.png", "", true);
     mPageNameIdList.insert("motor", ui->pageList->count() - 1);
-    connect(mPageMotorSettings, SIGNAL(startFocWizard()),
-            mPageWelcome, SLOT(startSetupWizardFocQml()));
 
     mPageMotor = new PageMotor(this);
     mPageMotor->setVesc(mVesc);
@@ -2022,14 +1912,5 @@ void MainWindow::on_canList_currentRowChanged(int currentRow)
                 }
             }
         }
-    }
-}
-
-void MainWindow::on_actionGamepadControl_triggered(bool checked)
-{
-    mPreferences->setUseGamepadControl(checked);
-
-    if (!mPreferences->isUsingGamepadControl()) {
-        ui->actionGamepadControl->setChecked(false);
     }
 }

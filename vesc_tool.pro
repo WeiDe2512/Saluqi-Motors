@@ -57,9 +57,9 @@ ios: {
 # sudo service bluetooth restart
 
 # Bluetooth available
-!win32: {
-    DEFINES += HAS_BLUETOOTH
-}
+#!win32: {
+#    DEFINES += HAS_BLUETOOTH
+#}
 
 # CAN bus available
 # Adding serialbus to Qt seems to break the serial port on static builds. TODO: Figure out why.
@@ -73,7 +73,7 @@ DEFINES += HAS_POS
 !android: {
     # Serial port available
     DEFINES += HAS_SERIALPORT
-    DEFINES += HAS_GAMEPAD
+#    DEFINES += HAS_GAMEPAD
 }
 }
 
@@ -205,9 +205,6 @@ SOURCES += main.cpp\
     vescinterface.cpp \
     parametereditor.cpp \
     digitalfiltering.cpp \
-    setupwizardapp.cpp \
-    setupwizardmotor.cpp \
-    startupwizard.cpp \
     utility.cpp \
     tcpserversimple.cpp \
     hexfile.cpp
@@ -224,9 +221,6 @@ HEADERS  += mainwindow.h \
     vescinterface.h \
     parametereditor.h \
     digitalfiltering.h \
-    setupwizardapp.h \
-    setupwizardmotor.h \
-    startupwizard.h \
     utility.h \
     tcpserversimple.h \
     hexfile.h

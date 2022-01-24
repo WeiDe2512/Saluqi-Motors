@@ -19,7 +19,6 @@
 
 #include "pagemotorsettings.h"
 #include "ui_pagemotorsettings.h"
-#include "setupwizardmotor.h"
 #include "utility.h"
 
 PageMotorSettings::PageMotorSettings(QWidget *parent) :
@@ -30,9 +29,6 @@ PageMotorSettings::PageMotorSettings(QWidget *parent) :
     ui->setupUi(this);
     layout()->setContentsMargins(0, 0, 0, 0);
     mVesc = nullptr;
-
-    QString theme = Utility::getThemePath();
-    ui->motorSetupWizardButton->setIcon(QPixmap(theme + "icons/Wizard-96.png"));
 }
 
 PageMotorSettings::~PageMotorSettings()
@@ -81,9 +77,4 @@ void PageMotorSettings::reloadParams()
             ui->textEdit->setText("Motor Setting Description not found.");
         }
     }
-}
-
-void PageMotorSettings::on_motorSetupWizardButton_clicked()
-{
-    emit startFocWizard();
 }

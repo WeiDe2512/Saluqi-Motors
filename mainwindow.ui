@@ -11,15 +11,13 @@
    </rect>
   </property>
   <property name="font">
-   <font>
-    <family>Roboto</family>
-   </font>
+   <font/>
   </property>
   <property name="windowTitle">
    <string>VESC Tool</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="res_platinum.qrc">
+   <iconset>
     <normaloff>:/res/icon.png</normaloff>:/res/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -76,7 +74,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="res_platinum.qrc">:/res/logo.png</pixmap>
+           <pixmap resource="res_bronze.qrc">:/res/logo.png</pixmap>
           </property>
           <property name="scaledContents">
            <bool>true</bool>
@@ -114,9 +112,7 @@
             </size>
            </property>
            <property name="font">
-            <font>
-             <family>Roboto</family>
-            </font>
+            <font/>
            </property>
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
@@ -140,8 +136,6 @@
              <widget class="QLabel" name="label">
               <property name="font">
                <font>
-                <family>Roboto</family>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -162,9 +156,7 @@
                </size>
               </property>
               <property name="font">
-               <font>
-                <family>Roboto</family>
-               </font>
+               <font/>
               </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
@@ -206,9 +198,7 @@
       <item>
        <widget class="QStackedWidget" name="pageWidget">
         <property name="font">
-         <font>
-          <family>Roboto</family>
-         </font>
+         <font/>
         </property>
         <property name="currentIndex">
          <number>-1</number>
@@ -241,9 +231,7 @@
       <item row="0" column="4">
        <widget class="QDoubleSpinBox" name="brakeCurrentBox">
         <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-         </font>
+         <font/>
         </property>
         <property name="toolTip">
          <string>Brake current</string>
@@ -404,9 +392,7 @@
       <item row="0" column="2">
        <widget class="QDoubleSpinBox" name="speedBox">
         <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-         </font>
+         <font/>
         </property>
         <property name="toolTip">
          <string>Speed</string>
@@ -437,9 +423,7 @@
       <item row="1" column="4">
        <widget class="QDoubleSpinBox" name="handbrakeBox">
         <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-         </font>
+         <font/>
         </property>
         <property name="toolTip">
          <string>Handbrake current</string>
@@ -467,9 +451,7 @@
       <item row="0" column="0">
        <widget class="QDoubleSpinBox" name="dutyBox">
         <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-         </font>
+         <font/>
         </property>
         <property name="toolTip">
          <string>Duty cycle</string>
@@ -531,9 +513,7 @@
       <item row="1" column="2">
        <widget class="QDoubleSpinBox" name="posBox">
         <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-         </font>
+         <font/>
         </property>
         <property name="toolTip">
          <string>Position</string>
@@ -558,9 +538,7 @@
       <item row="1" column="0">
        <widget class="QDoubleSpinBox" name="currentBox">
         <property name="font">
-         <font>
-          <family>DejaVu Sans Mono</family>
-         </font>
+         <font/>
         </property>
         <property name="toolTip">
          <string>Current</string>
@@ -628,8 +606,6 @@
    <addaction name="actionReadAppconfDefault"/>
    <addaction name="actionWriteAppconf"/>
    <addaction name="separator"/>
-   <addaction name="actionKeyboardControl"/>
-   <addaction name="actionGamepadControl"/>
    <addaction name="actionRtData"/>
    <addaction name="actionRtDataApp"/>
    <addaction name="actionIMU"/>
@@ -644,7 +620,7 @@
      <x>0</x>
      <y>0</y>
      <width>1054</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -711,23 +687,12 @@
    </widget>
    <widget class="QMenu" name="menuCommands">
     <property name="font">
-     <font>
-      <family>Roboto</family>
-     </font>
+     <font/>
     </property>
     <property name="title">
      <string>Edit</string>
     </property>
     <addaction name="actionPreferences"/>
-   </widget>
-   <widget class="QMenu" name="menuWizards">
-    <property name="title">
-     <string>Wizards</string>
-    </property>
-    <addaction name="actionAutoSetupFOC"/>
-    <addaction name="actionSetupMotorsFOCQuick"/>
-    <addaction name="actionAppSetupWizard"/>
-    <addaction name="actionMotorSetupWizard"/>
    </widget>
    <widget class="QMenu" name="menuTools_2">
     <property name="title">
@@ -742,7 +707,6 @@
    <addaction name="menuFile"/>
    <addaction name="menuCommands"/>
    <addaction name="menuTools_2"/>
-   <addaction name="menuWizards"/>
    <addaction name="menuTerminal"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
@@ -760,6 +724,9 @@
    </property>
   </action>
   <action name="actionReadMcconfDefault">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/res/icons/motor_default.png</normaloff>:/res/icons/motor_default.png</iconset>
@@ -829,6 +796,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/res/icons/can_off.png</normaloff>
@@ -882,6 +852,9 @@
    </property>
   </action>
   <action name="actionReadAppconfDefault">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
      <normaloff>:/res/icons/app_default.png</normaloff>:/res/icons/app_default.png</iconset>
@@ -942,39 +915,6 @@
    </property>
    <property name="text">
     <string>About VESC Tool</string>
-   </property>
-  </action>
-  <action name="actionKeyboardControl">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/res/icons/keys_off.png</normaloff>
-     <normalon>:/res/icons/keys_on.png</normalon>:/res/icons/keys_off.png</iconset>
-   </property>
-   <property name="text">
-    <string>keyboardControl</string>
-   </property>
-   <property name="toolTip">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Roboto'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;Enable keyboard control.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;Key functions:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-family:'Roboto'; font-weight:600;&quot;&gt;Up and Down Arrow Keys&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;Current control using the current value in the lower&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;left corner.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto'; font-weight:600;&quot;&gt;Right and Left Arrow Keys&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;Duty cycle control. Slowly ramps up and down the cuty&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;cycle. When e.g. starting with right and then also holding&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;left, the duty cycle is ramped higher.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Roboto';&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto'; font-weight:600;&quot;&gt;Page Down&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Roboto';&quot;&gt;Brake with the current set in the lower left corner.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
   <action name="actionParameterEditorMcconf">
@@ -1114,36 +1054,6 @@ p, li { white-space: pre-wrap; }
     <string>About Libraries Used</string>
    </property>
   </action>
-  <action name="actionMotorSetupWizard">
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/res/icons/Wizard-96.png</normaloff>:/res/icons/Wizard-96.png</iconset>
-   </property>
-   <property name="text">
-    <string>Setup Other Motors</string>
-   </property>
-   <property name="toolTip">
-    <string>Start the Motor Setup Wizard</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionAppSetupWizard">
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/res/icons/Wizard-96.png</normaloff>:/res/icons/Wizard-96.png</iconset>
-   </property>
-   <property name="text">
-    <string>Setup Input</string>
-   </property>
-   <property name="toolTip">
-    <string>Start the App Setup Wizard</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
   <action name="actionAboutQt">
    <property name="icon">
     <iconset resource="res.qrc">
@@ -1229,18 +1139,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>License</string>
-   </property>
-  </action>
-  <action name="actionAutoSetupFOC">
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/res/icons/Wizard-96.png</normaloff>:/res/icons/Wizard-96.png</iconset>
-   </property>
-   <property name="text">
-    <string>Setup Motors FOC</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionExportConfigurationParser">
@@ -1356,22 +1254,6 @@ p, li { white-space: pre-wrap; }
     <string>Stream BMS realtime data</string>
    </property>
   </action>
-  <action name="actionGamepadControl">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/res/icons/Controller-96.png</normaloff>
-     <normalon>:/res/icons/Controller-96_on.png</normalon>:/res/icons/Controller-96.png</iconset>
-   </property>
-   <property name="text">
-    <string>Gamepad Control</string>
-   </property>
-   <property name="toolTip">
-    <string>Use Gamepad Control</string>
-   </property>
-  </action>
   <action name="actionParameterEditorCustomConf0">
    <property name="icon">
     <iconset resource="res.qrc">
@@ -1379,18 +1261,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Parameter Editor Custom Conf 0</string>
-   </property>
-  </action>
-  <action name="actionSetupMotorsFOCQuick">
-   <property name="icon">
-    <iconset resource="res.qrc">
-     <normaloff>:/res/icons/Wizard-96.png</normaloff>:/res/icons/Wizard-96.png</iconset>
-   </property>
-   <property name="text">
-    <string>Setup Motors FOC (old)</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPreferences">
@@ -1417,7 +1287,7 @@ p, li { white-space: pre-wrap; }
  </customwidgets>
  <resources>
   <include location="res.qrc"/>
-  <include location="res_platinum.qrc"/>
+  <include location="res_bronze.qrc"/>
  </resources>
  <connections/>
 </ui>

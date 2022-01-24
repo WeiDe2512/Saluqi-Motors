@@ -40,22 +40,12 @@ public:
     VescInterface *vesc() const;
     void setVesc(VescInterface *vesc);
 
-public slots:
-    void startSetupWizardFocSimple();
-    void startSetupWizardFocQml();
-    void startSetupWizardMotor();
-    void startSetupWizardApp();
-
 private slots:
     void on_autoConnectButton_clicked();
-    void on_nrfPairButton_clicked();
 
 private:
     Ui::PageWelcome *ui;
     VescInterface *mVesc;
-    QmlUi mQmlUi;
-    Utility mUtil;
-
 };
 
 #endif // PAGEWELCOME_H

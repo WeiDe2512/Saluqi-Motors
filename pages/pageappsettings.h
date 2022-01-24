@@ -39,9 +39,6 @@ public:
     void setVesc(VescInterface *vesc);
     void reloadParams();
 
-private slots:
-    void on_appWizardButton_clicked();
-
 private:
     Ui::PageAppSettings *ui;
     VescInterface *mVesc;
